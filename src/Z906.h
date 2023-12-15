@@ -35,6 +35,9 @@
 #define	PWM_OFF             0x10
 #define	PWM_ON              0x11
 
+#define SELECT_EFFECT_51    0x23
+#define DISABLE_EFFECT_51   0x24
+
 #define SELECT_EFFECT_3D    0x14			
 #define SELECT_EFFECT_41    0x15			
 #define SELECT_EFFECT_21    0x16			
@@ -49,7 +52,7 @@
 #define RESET_PWR_UP_TIME   0x30
 #define NO_BLOCK_INPUTS     0x33
 
-// Double commmands
+// Double commands
 
 #define MAIN_LEVEL          0x03
 #define REAR_LEVEL          0x04

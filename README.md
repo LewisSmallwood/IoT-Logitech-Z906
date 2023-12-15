@@ -73,30 +73,33 @@ When making a web request to any of these endpoints, the microcontroller will ru
 |/input/3|-|SELECT_INPUT_3|Swap to the Optical 1 input|
 |/input/4|-|SELECT_INPUT_4|Swap to the Optical 2 input|
 |/input/5|-|SELECT_INPUT_5|Swap to the Coaxial input|
+|/input/disable|-|BLOCK_INPUTS|Disable signal input|
+|/input/enable|-|NO_BLOCK_INPUTS|Enable signal input|
 ||
-|/volume/main|value: 0-255|MAIN_LEVEL|Set the Main Level to the parameter value|
+|/volume/main|-|MAIN_LEVEL|Return the current Main Level|
+|/volume/main/set|value: 0-255|MAIN_LEVEL|Set the Main Level to the parameter value|
 |/volume/main/up|-|LEVEL_MAIN_UP|Increase Main Level by one unit|
 |/volume/main/down|-|LEVEL_MAIN_DOWN|Decrease Main Level by one unit|
-|/volume/subwoofer|value: 0-255|SUB_LEVEL|Set the Subwoofer Level to the parameter value|
+|/volume/subwoofer|-|SUB_LEVEL|Return the current Subwoofer Level|
+|/volume/subwoofer/set|value: 0-255|SUB_LEVEL|Set the Subwoofer Level to the parameter value|
 |/volume/subwoofer/up|-|LEVEL_SUB_UP|Increase Subwoofer Level by one unit|
 |/volume/subwoofer/down|-|LEVEL_SUB_DOWN|Decrease Subwoofer Level by one unit|
-|/volume/center|value: 0-255|CENTER_LEVEL|Set the Center Level to the parameter value|
+|/volume/center|-|CENTER_LEVEL|Return the current Center Level|
+|/volume/center/set|value: 0-255|CENTER_LEVEL|Set the Center Level to the parameter value|
 |/volume/center/up|-|LEVEL_CENTER_UP|Increase Center Level by one unit|
 |/volume/center/down|-|LEVEL_CENTER_DOWN|Decrease Subwoofer Level by one unit|
-|/volume/rear|value: 0-255|REAR_LEVEL|Set the Rear Level to the parameter value|
+|/volume/rear|-|REAR_LEVEL|Return the current Rear Level|
+|/volume/rear/set|value: 0-255|REAR_LEVEL|Set the Rear Level to the parameter value|
 |/volume/rear/up|-|LEVEL_REAR_UP|Increase Rear Level by one unit|
 |/volume/rear/down|-|LEVEL_REAR_DOWN|Decrease Rear Level by one unit|
 ||
-|/tbd|-|PWM_OFF|PWM Generator OFF|
-|/tbd|-|PWM_ON|PWM Generator ON|
+|/input/decode/on|-|SELECT_EFFECT_51|Enable Decode Mode|
+|/input/decode/off|-|DISABLE_EFFECT_51|Disable Decode Mode|
 ||
-|/tbd|-|SELECT_EFFECT_3D|Enable 3D Effect in current input|
-|/tbd|-|SELECT_EFFECT_41|Enable 4.1 Effect in current input|
-|/tbd|-|SELECT_EFFECT_21|Enable 2.1 Effect in current input|
-|/tbd|-|SELECT_EFFECT_NO|Disable all Effects in current input|
-||
-|/tbd|-|BLOCK_INPUTS|Disable signal input|
-|/tbd|-|NO_BLOCK_INPUTS|Enable signal input|
+|/input/effect/3D|-|SELECT_EFFECT_3D|Enable 3D Effect in current input|
+|/input/effect/4.1|-|SELECT_EFFECT_41|Enable 4.1 Effect in current input|
+|/input/effect/2.1|-|SELECT_EFFECT_21|Enable 2.1 Effect in current input|
+|/input/effect/off|-|SELECT_EFFECT_NO|Disable all Effects in current input|
 ||
 |/save|-|EEPROM_SAVE|Save current settings to EEPROM*|
 ||
@@ -104,19 +107,9 @@ When making a web request to any of these endpoints, the microcontroller will ru
 |/mute/off|-|MUTE_OFF|Disable Mute|
 ||
 |/temperature|-|GET_TEMP|Gets the system temperature|
-|/power|-|TOGGLE_POWER|Toggle the system power|
-|/power/on|-|POWER_ON|Turn the system on|
-|/power/off|-|POWER_OFF|Turn the system off|
+|/version|-|VERSION|Gets the system firmware version|
+|/power|-|STATUS_STBY|Get the current standby status|
+|/power/on|-|PWM_ON|Turn the system on|
+|/power/off|-|PWM_OFF|Turn the system off|
 
 *Please note, use the **EEPROM_SAVE** function with caution. Each EEPROM has a limited number of write cycles (~100,000) per address. If you write excessively to the EEPROM, you will reduce the lifespan.
-
-
-```C++
-LOGI.request(MAIN_LEVEL)    // return current Main Level
-LOGI.request(REAR_LEVEL)    // return current Rear Level
-LOGI.request(CENTER_LEVEL)  // return current Center Level
-LOGI.request(SUB_LEVEL)     // return current Subwoofer Level
-
-LOGI.request(STATUS_STBY)   // return stand-by status
-LOGI.request(VERSION)       // return firmware version
-```

@@ -6,7 +6,8 @@ struct Endpoint {
   const uint8_t action;
 };
 
-const Endpoint endpoints[] = {  
+const Endpoint endpoints[] = {
+  { "input", GetValue, CURRENT_INPUT },                     // Get the currently selected input
   { "input/1", SelectInput, SELECT_INPUT_1 },               // Swap to the TRS 5.1 input
   { "input/2", SelectInput, SELECT_INPUT_2 },               // Swap to the RCA 2.0 input
   { "input/3", SelectInput, SELECT_INPUT_3 },               // Swap to the Optical 1 input
@@ -58,6 +59,3 @@ const Endpoint endpoints[] = {
   { "power/on", RunCommand, PWM_OFF },                      // Turn the system on
   { "power/off", RunFunction, 0 },                          // Turn the system off
 };
-
-// CURRENT_INPUT
-// GET_PWR_UP_TIME

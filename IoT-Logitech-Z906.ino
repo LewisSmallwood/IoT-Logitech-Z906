@@ -124,10 +124,17 @@ void respondToRequest(Endpoint endpoint) {
         return server.send(200, "application/json", "{\"status\": \"connected\", \"success\": true }");
         
     } else if (endpoint.type == SetValue) {
-        // TODO: Get and validate the inputted value - fail if invaild.
-        LOGI.cmd(endpoint.action, 15);
-        return server.send(501, "application/json", "{\"status\": \"connected\", \"success\": false, \"message\": \"Under construction.\" }");
-        
+        int parsedValue;
+        bool isValid = validateInputValue("value", parsedValue);
+    
+        if (isValid) {
+            LOGI.cmd(endpoint.action, parsedValue);
+            return server.send(200, "application/json", "{\"status\": \"connected\", \"success\": true }");
+        }
+
+        // Invalid
+        return server.send(400, "application/json", "{\"status\": \"connected\", \"success\": false, \"message\": \"Invalid value. Value must be between 0 and 255.\" }");
+              
     } else if (endpoint.type == GetValue) {
         return server.send(200, "application/json", "{\"status\": \"connected\", \"success\": true, \"value\": "+String(LOGI.request(endpoint.action))+" }");
 
@@ -154,6 +161,37 @@ void handleGetTemperature() {
 void handlePowerOff() {
     LOGI.off();
     return server.send(200, "application/json", "{\"status\": \"connected\", \"success\": true }");
+}
+
+/**
+ * Validate and parse the input value.
+ * Returns true if the value is valid, false otherwise.
+ * If valid, the parsed value is stored in the 'result' parameter.
+ */
+bool validateInputValue(const String& argName, int& result) {
+    if (server.hasArg(argName)) {
+        String valueStr = server.arg(argName);
+        int value = valueStr.toInt();
+
+        // Check if the conversion was successful
+        if (value != 0 || valueStr.equals("0")) {
+            // Valid value, store the result.
+            result = value;
+
+            if (result >= 0 && result <= 255) {
+                return true;  // Value is valid.
+            } else {
+                // Value is not in the valid range.
+                return false;
+            }
+        } else {
+            // Invalid value format.
+            return false;
+        }
+    } else {
+        // No value provided in the request.
+        return false;
+    }
 }
 
 /**

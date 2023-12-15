@@ -66,7 +66,7 @@ The project makes the following HTTP endpoints available to control all the func
 When making a web request to any of these endpoints, the microcontroller will run the desired action, interfacing with the Logitech Z906.
 
 #### Endpoints
-|Endpoint|Parameters|Serial Argument|Description|
+|Endpoint|Parameters|Serial Command|Description|
 |---|---|---|---|
 |/input/1|-|SELECT_INPUT_1|Swap to the TRS 5.1 input|
 |/input/2|-|SELECT_INPUT_2|Swap to the RCA 2.0 input|

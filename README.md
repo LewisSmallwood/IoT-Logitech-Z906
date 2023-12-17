@@ -12,10 +12,14 @@ The serial control logic for this project is based on the works of [zarpli](http
 ## Hardware
 To enable the control of the unit over the internet, an ESP8266 microcontroller was used which is a low-cost WiFi connected microcontroller.
 
-The controller was wired up to the unit by using the DE-15 console port, which makes use of TTL serial communication at 3.3V.
+The controller can be wired up to the console port or the Z906 using a rewirable DE-15 male plug, in order to make use of TTL serial communication at 3.3V.
 
-The following table illustrates the pinout.
+Below is a circuit diagram that illustrates how to wire up an ESP8266 NodeMCU microcontroller to the console port.
 
+
+<p align="left"><img src=/images/circuit-diagram.png width="500"></p>
+
+From DE-15 pins
 |Pin|Description|Pin|Description|
 |---|---|---|---|
 |3|GND|6|GND|

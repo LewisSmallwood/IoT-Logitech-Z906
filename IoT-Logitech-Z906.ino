@@ -11,20 +11,11 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 
-int timer = 0;
 ESP8266WebServer server(80);
 ESP8266WiFiMulti WiFiMulti;
 
-// Instantiate a Z906 object and Attach to Serial1
-Z906 LOGI(Serial1);
-
-/**
- * Setup the serial communication with the Z906.
- */
-void initSerial() {
-    Serial.begin(9600);
-    while(!Serial);
-}
+// Instantiate a Z906 object and attach to Serial
+Z906 LOGI(Serial);
 
 /**
  * Setup and connect to a WiFi network.
@@ -38,21 +29,16 @@ void initWiFi() {
     delay(2000);
   
     // Connect to the WiFi.
-    connectToWiFi("Connecting");
+    connectToWiFi();
 }
 
 /**
  * Connect to the WiFi.
  */
-void connectToWiFi(const String& message) {
-    timer = 1;
-    Serial.printf("\n[SETUP] %s (%d second)...\n", message.c_str(), timer);
-    
+void connectToWiFi() {
+    // Wait for connection.    
     while (WiFiMulti.run() != WL_CONNECTED) {
-      timer++;
-      Serial.printf("[SETUP] %s (%d seconds)...\n", message.c_str(), timer);
       delay(1000);
-      Serial.flush();
     }
     
     onConnected();
@@ -62,23 +48,11 @@ void connectToWiFi(const String& message) {
  * When connection is restored, log the details.
  */
 void onConnected() {
-    timer = 0;
-    Serial.flush();
-    Serial.print("[SETUP] Connected to ");
-    Serial.print(WiFi.SSID());
-    Serial.print(" (");
-    Serial.print(WiFi.localIP());
-    Serial.println(").");
-    
     // Set the hostname,
     WiFi.hostname("LOGITECH-Z906");
     
     // Configure MDNS.
-    if (MDNS.begin("logitech-z906")) {
-        Serial.println("[SETUP] MDNS responder started.");
-    }
-  
-    Serial.println();
+    MDNS.begin("logitech-z906");
 }
 
 /**
@@ -140,7 +114,8 @@ void respondToRequest(Endpoint endpoint) {
 
     } else if (endpoint.type == RunFunction) {
         if (endpoint.path == "temperature") return handleGetTemperature();
-        if (endpoint.path == "power/off") return handlePowerOff();
+        if (endpoint.path == "power/on") return handlePowerToggle(true);
+        if (endpoint.path == "power/off") return handlePowerToggle(false);
     }
 
     return server.send(405, "application/json", "{\"status\": \"connected\", \"success\": false, \"message\": \"Your action was recognised, but it is not supported.\" }");
@@ -156,10 +131,15 @@ void handleGetTemperature() {
 }
 
 /**
- * Gracefully turn the power off, saving the last used state.
+ * Gracefully turn the power on or off.
  */
-void handlePowerOff() {
-    LOGI.off();
+void handlePowerToggle(bool turnOn) {
+    if (turnOn) {
+        LOGI.on();
+    } else {
+        LOGI.off();
+    }
+    
     return server.send(200, "application/json", "{\"status\": \"connected\", \"success\": true }");
 }
 
@@ -198,7 +178,6 @@ bool validateInputValue(const String& argName, int& result) {
  * Setup
  */
 void setup() {
-  initSerial();
   initWiFi();
   initWebServer();
 }
@@ -207,6 +186,6 @@ void setup() {
  * Loop
  */
 void loop() {
-  if (WiFi.status() != WL_CONNECTED) connectToWiFi("Reconnecting");
+  if (WiFi.status() != WL_CONNECTED) connectToWiFi();
   server.handleClient();
 }

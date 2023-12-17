@@ -56,6 +56,6 @@ const Endpoint endpoints[] = {
   { "temperature", RunFunction, 0 },                        // Get the system temperature
   { "version", GetValue, VERSION },                         // Get the system firmware version
   { "power", GetValue, GET_STATUS },                        // Get the system standby status
-  { "power/on", RunCommand, PWM_OFF },                      // Turn the system on
+  { "power/on", RunFunction, 0 },                           // Turn the system on
   { "power/off", RunFunction, 0 },                          // Turn the system off
 };

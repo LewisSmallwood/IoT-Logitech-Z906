@@ -19,31 +19,29 @@ Below is a circuit diagram that illustrates how to wire up an ESP8266 NodeMCU mi
 
 <p align="left"><img src=/images/circuit-diagram.png width="500"></p>
 
-From DE-15 pins
-|Pin|Description|Pin|Description|
-|---|---|---|---|
-|3|GND|6|GND|
-|11|3.3V @ 250mA|12|TX|
-|13|RX|15|Console Enable|
-
-D2-71583 **NO** is 5V tolerant. If you have Arduino UNO, MEGA, etc use a **Logic Level Converter.**
-
-|Serial settings||
-|---|---|
-|Baud rate|57600|
-|Data|8 bit|
-|Parity|Odd|
-|Stop|1 bit|
-
-Here is the DE-15 male as viewed from the front of the Main Board.
+Here is the pinout of a DE-15 male port (as viewed from the front).
 
 <img src=/images/DE-15-M.jpg width="200">
 
-# Enable Console
+The following pins from the Male DE-15 port should be wired to the ESP8266 in the following configuration:
+|DE-15 Pin|Description|ESP8266 Pin|
+|---|---|---|
+|3|GND|GND|
+|6|GND|GND|
+|11|3.3V @ 250mA|3V|
+|12|TX|RX|
+|13|RX|TX|
+|15|Console Enable|GND|
 
-Connect pin 15 to GND.
+# Finished Product
 
-<p align="center"><img src=/images/Z906-ECON.jpg></p>
+The connection between the Male DE-15 port and the ESP8266 should look something like this.
+
+<p align="left"><img src=/images/ESP8266.png width="400"></p>
+
+If using a rewirable plug, it should look something like this (with a few more cables!)
+<p align="left"><img src=/images/Z906-ECON.jpg width="600"></p>
+
 
 
 ## Software
@@ -117,3 +115,17 @@ When making a web request to any of these endpoints, the microcontroller will ru
 |/power/off|-|PWM_OFF|Turn the system off|
 
 *Please note, use the **EEPROM_SAVE** function with caution. Each EEPROM has a limited number of write cycles (~100,000) per address. If you write excessively to the EEPROM, you will reduce the lifespan.
+
+#### Example Usage
+The API can be called through any browser. For example:
+
+`GET /temperature` should respond like this:
+<p align="left"><img src=/images/request.png width="600"></p>
+
+Useful requests also include:
+* `GET /volume/main/set?value=255` Sets the main volume to 100%.
+
+# Troubleshooting
+1. Check your wiring and connections are correct.
+2. Check your internet connectivity and WiFI credentials.
+3. Check you have called `/power/on` and `/input/enable` and `/mute/off` and you're using the correct input.

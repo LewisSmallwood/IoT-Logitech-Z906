@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>Logitech Z906 Demo</title>
+  	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  	<meta name="robots" content="noindex, nofollow">
+  	<meta name="googlebot" content="noindex, nofollow">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.js"></script>
+  </head>
+
+  <body>
+	  <div class="container">
+      <div class="Z906">
+        <img id="on" src="off.png" />
+
+        <div class="volume-control">
+          <div class="knob-holder">
+            <div id="knob" class="knob"></div>
+          </div>
+        </div>
+
+        <svg width="1004" height="288" viewBox="0 0 1004 288" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Clip Path holder -->
+          <clipPath id="clipPath"></clipPath>
+
+          <!-- Inputs -->
+          <path d="M224 79H192V64H224V79Z" fill="transparent" id="input1" />
+          <path d="M224 100H192V85H224V100Z" fill="transparent" id="input2" />
+          <path d="M224 105H190.5V121.5H224V105Z" fill="transparent" id="input3" />
+          <path d="M223.5 127H191V143H223.5V127Z" fill="transparent" id="input4" />
+          <path d="M223 149.5H190.5V166H223V149.5Z" fill="transparent" id="input5" />
+          <path d="M222.5 170.5H191V185H222.5V170.5Z" fill="transparent" id="input6" />
+
+          <!-- Effects -->
+          <path d="M315.5 63.5H283.5V78H315.5V63.5Z" fill="transparent" id="decode" />
+          <path d="M315 128H283V142.5H315V128Z" fill="transparent" id="effect3d" />
+          <path d="M315 149H283V163.5H315V149Z" fill="transparent" id="effect41" />
+          <path d="M315 170H283V184.5H315V170Z" fill="transparent" id="effect21" />
+
+          <!-- Volume -->
+          <circle cx="501.5" cy="130.5" r="90.5" fill="transparent" id="volumeDial" />
+          <path d="M423.5 186.5H406V202.5H423.5V186.5Z" fill="transparent" id="volume1" />
+          <path d="M405.5 144H388V160H405.5V144Z" fill="transparent" id="volume2" />
+          <path d="M407.5 98H390V114H407.5V98Z" fill="transparent" id="volume3" />
+          <path d="M428.5 58H411V74H428.5V58Z" fill="transparent" id="volume4" />
+          <path d="M465.5 30H448V46H465.5V30Z" fill="transparent" id="volume5" />
+          <path d="M509.5 20H492V36H509.5V20Z" fill="transparent" id="volume6" />
+          <path d="M554.5 30H537V46H554.5V30Z" fill="transparent" id="volume7" />
+          <path d="M590.5 57H573V73H590.5V57Z" fill="transparent" id="volume8" />
+          <path d="M612.5 98H595V114H612.5V98Z" fill="transparent" id="volume9" />
+          <path d="M614.5 144H597V160H614.5V144Z" fill="transparent" id="volume10" />
+          <path d="M596.5 187H579V203H596.5V187Z" fill="transparent" id="volume11" />
+
+          <!-- Outputs -->
+          <path d="M727 98H701.5V126.5H727V98Z" fill="transparent" id="frontLeft" />
+          <path d="M768 98.5H732.5V127.5H768V98.5Z" fill="transparent" id="center" />
+          <path d="M798 98H772.5V126.5H798V98Z" fill="transparent" id="frontRight" />
+          <path d="M729.5 151.5H700.5V181.5H729.5V151.5Z" fill="transparent" id="rearLeft" />
+          <path d="M799 152H770V182H799V152Z" fill="transparent" id="rearRight" />
+          <path d="M842 98.5H804.5V135.5H842V98.5Z" fill="transparent" id="subwoofer" />
+
+          <!-- Buttons -->
+          <a href="#">
+            <circle cx="663" cy="213" r="21" fill="transparent" id="muteButton" />
+          </a>
+
+          <a href="#">
+            <rect href="#" x="723" y="202" width="53" height="22" rx="11" fill="transparent" id="levelButton" />
+          </a>
+
+          <a href="#">
+            <rect href="#" x="260" y="200" width="53" height="22" rx="11" fill="transparent" id="effectButton" />
+          </a>
+
+          <a href="#">
+            <rect href="#" x="174" y="200" width="52" height="22" rx="11" fill="transparent" id="inputButton" />
+          </a>
+
+          <a href="#">
+            <circle href="#" cx="114" cy="210" r="21" fill="transparent" id="powerButton" />
+          </a>
+
+          <!-- Lights On -->
+          <image width="1004" height="288" clip-path="url(#clipPath)" xlink:href="on.png" style="pointer-events: none;" >
+        </svg>
+      </div>
+	  </div>
+
+    <script type="text/javascript" src="script.js"></script>
+
+  </body>
+</html>

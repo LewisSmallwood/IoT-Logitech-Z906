@@ -210,6 +210,11 @@ int Z906::request(uint8_t cmd) {
             return static_cast<uint8_t>((static_cast<uint16_t>(status[cmd]) * 255) / MAX_VOL);
         }
         
+        if (cmd == GET_STATUS) {
+            // Get power status
+            return status[STATUS_STBY];
+        }
+
         // Return the requested data based on the command
         return status[cmd];
     }
@@ -256,7 +261,7 @@ int Z906::cmd(uint8_t cmd) {
  * @param cmd_a The command representing the parameter to be updated (e.g., MAIN_LEVEL, REAR_LEVEL, etc.).
  * @param cmd_b The value to be set for the specified parameter.
  */
-int Z906::cmd(uint8_t cmd_a, uint8_t cmd_b) {
+void Z906::cmd(uint8_t cmd_a, uint8_t cmd_b) {
     // Update the internal status buffer with the current device status
     update();
 

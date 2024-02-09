@@ -25,7 +25,7 @@ void initWiFi() {
     WiFi.mode(WIFI_STA);
   
     // Stored WiFi credentials.
-    for (Network network : network_credentials) WiFiMulti.addAP(network.ssid, network.password);
+    for (Wifi wifi : wifi_credentials) WiFiMulti.addAP(wifi.ssid, wifi.password);
     delay(2000);
   
     // Connect to the WiFi.
@@ -49,10 +49,11 @@ void connectToWiFi() {
  */
 void onConnected() {
     // Set the hostname,
-    WiFi.hostname("LOGITECH-Z906");
+    Settings settings = network_settings;
+    WiFi.hostname(settings.hostname);
     
     // Configure MDNS.
-    MDNS.begin("logitech-z906");
+    MDNS.begin(settings.mdnsname);
 }
 
 /**
@@ -67,9 +68,13 @@ void initWebServer() {
  * Handle a HTTP request.
  */
 void handleRequest() {
+    // Get request uri
     String endpoint = server.uri();;
-      
+
+    // Check if endpoint is root and return text to let user know it is active  
     if (endpoint == "/") return server.send(200, "text/plain", "This is the Logitech Z906 API.");
+
+    // Remove "/" from uri for processing of other endpoints. 
     if (endpoint.length() > 1) endpoint = endpoint.substring(1);
   
     // Check if the Z906 is connected before processing any commands.
@@ -80,7 +85,7 @@ void handleRequest() {
         if (e.path == endpoint) return respondToRequest(e);
     }
   
-    // If not found, redirect to home.
+    // If not found, redirect to home / root.
     server.sendHeader("Location", String("/"), true);
     server.send(302, "text/plain", "");
 }

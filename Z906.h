@@ -85,7 +85,7 @@ class Z906
         Z906(HardwareSerial &serial);
         
         int 	cmd(uint8_t);
-        int 	cmd(uint8_t, uint8_t);
+        void 	cmd(uint8_t, uint8_t);
         int		request(uint8_t);
         void 	print_status();
         

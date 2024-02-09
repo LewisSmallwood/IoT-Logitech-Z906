@@ -56,7 +56,7 @@ It contains specific configuration details for your project, including WiFi pass
 To specify the network credentials you wish to use, the network credentials list can be modified in the `environment.h` file as follows:
 
 ```
-const Network network_credentials[] = {
+const Wifi wifi_credentials[] = {
   { "YOUR_SSID_1", "YOUR_PASSWORD_1" },
   { "YOUR_SSID_2", "YOUR_PASSWORD_2" },
 };

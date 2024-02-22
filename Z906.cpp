@@ -211,8 +211,8 @@ int Z906::request(uint8_t cmd) {
         }
         
         if (cmd == GET_STATUS) {
-            // Get power status
-            return status[STATUS_STBY];
+            // Get the power status so that (Standby = 0, Powered on = 1).
+            return (status[STATUS_STBY] == 0) ? 1 : 0;
         }
 
         // Return the requested data based on the command

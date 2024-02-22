@@ -110,7 +110,7 @@ When making a web request to any of these endpoints, the microcontroller will ru
 ||
 |/temperature|-|GET_TEMP|Gets the system temperature|
 |/version|-|VERSION|Gets the system firmware version|
-|/power|-|STATUS_STBY|Get the current standby status (Standby = 1, Powered on = 0)|
+|/power|-|STATUS_STBY|Get the current power status as a boolean|
 |/power/on|-|PWM_ON|Turn the system on|
 |/power/off|-|PWM_OFF|Turn the system off|
 

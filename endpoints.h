@@ -1,4 +1,4 @@
-enum EndpointType { SelectInput, RunCommand, SetValue, GetValue, RunFunction };
+enum EndpointType { SelectInput, RunCommand, SetValue, GetValue, GetBoolean, RunFunction };
 
 struct Endpoint {
   const String path;
@@ -55,7 +55,7 @@ const Endpoint endpoints[] = {
   { "mute/off", RunCommand, MUTE_OFF },                     // Disable mute
   { "temperature", RunFunction, 0 },                        // Get the system temperature
   { "version", GetValue, VERSION },                         // Get the system firmware version
-  { "power", GetValue, GET_STATUS },                        // Get the system standby status
+  { "power", GetBoolean, GET_STATUS },                      // Get the system standby status
   { "power/on", RunFunction, 0 },                           // Turn the system on
   { "power/off", RunFunction, 0 },                          // Turn the system off
 };

@@ -117,6 +117,10 @@ void respondToRequest(Endpoint endpoint) {
     } else if (endpoint.type == GetValue) {
         return server.send(200, "application/json", "{\"status\": \"connected\", \"success\": true, \"value\": "+String(LOGI.request(endpoint.action))+" }");
 
+    } else if (endpoint.type == GetBoolean) {
+        String value = (LOGI.request(endpoint.action) != 0) ? "true" : "false";
+        return server.send(200, "application/json", "{\"status\": \"connected\", \"success\": true, \"value\": " + value + " }");
+
     } else if (endpoint.type == RunFunction) {
         if (endpoint.path == "temperature") return handleGetTemperature();
         if (endpoint.path == "power/on") return handlePowerToggle(true);

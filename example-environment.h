@@ -3,18 +3,19 @@ struct Wifi {
   const char* password;
 };
 
-//Add multiple ssid's if required
-const Wifi wifi_credentials[] = {
-  { "YOUR_SSID_1", "YOUR_PASSWORD_1" }//,
-  //{ "YOUR_SSID_2", "YOUR_PASSWORD_2" }
-};
-
 struct Settings {
   const char* hostname;
   const char* mdnsname;
 };
 
-//Set network hostname and mdns name (Use only compliant scheme, no checks beeing performed!)
+// Add multiple WiFi Networks (SSIDs) as required.
+const Wifi wifi_credentials[] = {
+  { "YOUR_SSID_1", "YOUR_PASSWORD" },
+  { "YOUR_SSID_2", "YOUR_PASSWORD" }
+};
+
+// Set the network hostname and MDNS name.
 const Settings network_settings = {
-  { "LOGITECH-Z906", "logitech-z906" }
+  .hostname = "LOGITECH-Z906",
+  .mdnsname = "logitech-z906"
 };
